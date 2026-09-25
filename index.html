@@ -84,10 +84,10 @@
     display:grid;
     grid-template-columns:1fr 1fr;
     grid-template-areas:
-      "cal   cal"
-      "rsvp  rsvp"
       "timer time"
-      "dc    loc";
+      "cal   cal"
+      "dc    loc"
+      "rsvp  rsvp";
     gap:30px;
     align-items:stretch;
   }
@@ -279,11 +279,11 @@
     .hero-label{font-size:23px}
     .layout{
       grid-template-columns:1fr;
-      grid-template-areas:"cal" "rsvp" "timer" "time" "dc" "loc";
+      grid-template-areas:"time" "cal"  "timer"  "dc" "loc" "rsvp";
       gap:24px;padding-top:26px;
     }
     .block{padding:38px 22px}
-    .hero{padding:52px 18px 46px}
+    .hero{padding:52px 18px 0px 46px}
     .t-item{min-width:72px}
     .t-num{font-size:38px}
     .photo-frame img{height:230px}
@@ -349,6 +349,17 @@
 </header>
 
 <main class="layout">
+
+  <section class="block b-time rv">
+    <h2 class="b-title">Во сколько?</h2>
+    <svg class="squiggle" viewBox="0 0 130 20"><use href="#squig"/></svg>
+    <div class="time-row">
+      <svg viewBox="0 0 48 32"><use href="#rings"/></svg>
+      <div class="time-big hl">16:00</div>
+      <svg viewBox="0 0 32 44"><use href="#glasses"/></svg>
+    </div>
+    <p class="time-note">Сбор гостей и начало торжества —<br>ждём вас вовремя, чтобы ничего не пропустить</p>
+  </section>
 
   <section class="cal-strip rv">
     <div class="cal-head"><span>Ноябрь</span><span>2026</span></div>
@@ -435,16 +446,7 @@
     <div class="timer-done" id="timerDone" style="display:none">Торжество уже совсем близко!</div>
   </section>
 
-  <section class="block b-time rv">
-    <h2 class="b-title">Во сколько?</h2>
-    <svg class="squiggle" viewBox="0 0 130 20"><use href="#squig"/></svg>
-    <div class="time-row">
-      <svg viewBox="0 0 48 32"><use href="#rings"/></svg>
-      <div class="time-big hl">16:00</div>
-      <svg viewBox="0 0 32 44"><use href="#glasses"/></svg>
-    </div>
-    <p class="time-note">Сбор гостей и начало торжества —<br>ждём вас вовремя, чтобы ничего не пропустить</p>
-  </section>
+  
 
   <section class="block dark b-dc rv">
     <h2 class="b-title">Дресс-код</h2>
