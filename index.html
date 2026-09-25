@@ -87,6 +87,7 @@
       "timer time"
       "cal   cal"
       "dc    loc"
+      "wish  wish"
       "rsvp  rsvp";
     gap:30px;
     align-items:stretch;
@@ -97,6 +98,7 @@
   .b-time{grid-area:time}
   .b-dc{grid-area:dc}
   .b-loc{grid-area:loc}
+  .wish-strip{grid-area:wish}
 
   .block{
     background:var(--card);border-radius:26px;padding:46px 34px;
@@ -178,6 +180,23 @@
   .swatch:hover{transform:scale(1.12)}
   .dc-note{margin-top:26px;font-style:italic;font-size:18px;color:rgba(243,238,226,.75)}
 
+  /* ---------- ПОЖЕЛАНИЯ (воздушная секция, как в референсе) ---------- */
+  .wish-strip{padding:20px 10px 10px;text-align:center}
+  .wish-title{
+    font-family:'Caveat',cursive;font-weight:700;
+    font-size:clamp(46px,5.4vw,62px);color:var(--olive);line-height:1.1;
+  }
+  .wish-item{margin-top:36px}
+  .wish-item h3{font-size:26px;font-weight:600;color:var(--green)}
+  .wish-item p{margin:10px auto 0;max-width:52ch;font-size:20px;color:#55594c}
+  .wish-heart{width:40px;height:auto;color:var(--olive);margin:44px auto 0}
+  .wish-sign{
+    display:flex;align-items:center;gap:18px;
+    max-width:560px;margin:36px auto 0;color:var(--olive);
+  }
+  .wish-sign::before,.wish-sign::after{content:"";flex:1;height:1px;background:var(--line)}
+  .wish-sign span{font-family:'Caveat',cursive;font-size:32px;white-space:nowrap}
+
   footer{text-align:center;padding:26px 20px 64px}
   footer .hero-heart{margin:0 auto 14px;width:44px;animation:none}
   .f-names{font-family:'Caveat',cursive;font-size:44px;color:var(--green)}
@@ -189,7 +208,7 @@
   /* ---------- RSVP ---------- */
   .rsvp-form{
     display:flex;flex-direction:column;gap:22px;
-    max-width:520px;margin:0 auto;width:100%;text-align:left;
+    max-width:560px;margin:0 auto;width:100%;text-align:left;
   }
   .rsvp-lead{text-align:center;font-style:italic;font-size:20px;color:#6a6f62;margin-bottom:4px}
 
@@ -198,6 +217,7 @@
     font-family:'Caveat',cursive;font-size:28px;color:var(--green);
     margin-bottom:4px;
   }
+  .rsvp-label .rsvp-hint{font-size:18px}
 
   .rsvp-radios{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .rsvp-radio{position:relative}
@@ -234,6 +254,30 @@
 
   .guests-box{display:none}
   .guests-box.show{display:block}
+
+  /* напитки: чекбоксы-плитки в две колонки */
+  .drink-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .drink{position:relative}
+  .drink input{position:absolute;opacity:0;inset:0;cursor:pointer;z-index:2}
+  .drink label{
+    display:flex;align-items:center;gap:12px;
+    padding:14px 16px;background:#fff;
+    border:1.5px solid var(--line);border-radius:14px;
+    cursor:pointer;font-size:19px;color:#55594c;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .drink .box{
+    width:22px;height:22px;flex:none;
+    border:2px solid var(--sage);border-radius:6px;
+    display:grid;place-items:center;
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .drink .box svg{width:14px;height:14px;color:#fff;opacity:0;transition:opacity .2s ease}
+  .drink input:checked + label{border-color:var(--olive);background:#F3F6EC;color:var(--ink)}
+  .drink input:checked + label .box{background:var(--olive);border-color:var(--olive)}
+  .drink input:checked + label .box svg{opacity:1}
+
+  .songs{display:flex;flex-direction:column;gap:10px}
 
   .rsvp-submit{
     display:flex;align-items:center;justify-content:center;gap:10px;
@@ -279,11 +323,11 @@
     .hero-label{font-size:23px}
     .layout{
       grid-template-columns:1fr;
-      grid-template-areas:"time" "cal"  "timer"  "dc" "loc" "rsvp";
+      grid-template-areas:"time" "cal" "timer" "dc" "loc" "wish" "rsvp";
       gap:24px;padding-top:26px;
     }
     .block{padding:38px 22px}
-    .hero{padding:52px 18px 0px 46px}
+    .hero{padding:52px 18px 46px}
     .t-item{min-width:72px}
     .t-num{font-size:38px}
     .photo-frame img{height:230px}
@@ -291,6 +335,8 @@
     .time-row svg{width:42px}
     .falling-heart{display:none}
     .rsvp-radios{grid-template-columns:1fr}
+    .drink-grid{grid-template-columns:1fr}
+    .wish-item{margin-top:28px}
   }
 </style>
 </head>
@@ -326,7 +372,7 @@
     <path d="M16 18 v16 M9 40 h14 M16 34 c-3 3 -5 4 -7 6 M16 34 c3 3 5 4 7 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
   </symbol>
   <symbol id="check" viewBox="0 0 24 24">
-    <path d="M4 12 l5 5 l11 -11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M4 12 l5 5 l11 -11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
   <symbol id="loader" viewBox="0 0 24 24">
     <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="36 60"/>
@@ -372,14 +418,80 @@
     </div>
   </section>
 
-  <!-- ============ НОВЫЙ БЛОК: RSVP ============ -->
+  <section class="block b-timer rv">
+    <h2 class="b-title">До торжества осталось</h2>
+    <svg class="squiggle" viewBox="0 0 130 20"><use href="#squig"/></svg>
+    <div class="timer" id="timer">
+      <div class="t-item"><div class="t-num" id="td">0</div><div class="t-lbl">дней</div></div>
+      <div class="t-item"><div class="t-num" id="th">0</div><div class="t-lbl">часов</div></div>
+      <div class="t-item"><div class="t-num" id="tm">0</div><div class="t-lbl">минут</div></div>
+      <div class="t-item"><div class="t-num" id="ts">0</div><div class="t-lbl">секунд</div></div>
+    </div>
+    <div class="timer-done" id="timerDone" style="display:none">Торжество уже совсем близко!</div>
+  </section>
+
+  <section class="block dark b-dc rv">
+    <h2 class="b-title">Дресс-код</h2>
+    <svg class="squiggle" viewBox="0 0 130 20"><use href="#squig"/></svg>
+    <p class="lead">Будем рады, если вы поддержите элегантный стиль вечера и выберете наряды в предложенной палитре.</p>
+    <div class="palette">
+      <span class="swatch" style="background:#EDE4D3" title="Молочный"></span>
+      <span class="swatch" style="background:#000" title="Черный"></span>
+      <span class="swatch" style="background:#8A9A5B" title="Оливковый"></span>
+      <span class="swatch" style="background:#2F4A3A" title="Хвойный"></span>
+      <span class="swatch" style="background:#5A4632" title="Шоколад"></span>
+      <span class="swatch" style="background:#732F37" title="Бордо"></span>
+    </div>
+    <p class="dc-note">Пожалуйста, оставьте неон и яркие принты дома — пусть главный свет достанется нам двоим ♥</p>
+  </section>
+
+  <section class="block dark b-loc rv">
+    <h2 class="b-title">Локация</h2>
+    <svg class="squiggle" viewBox="0 0 130 20"><use href="#squig"/></svg>
+    <div class="loc-name">Ресторан «Панорама»</div>
+    <div class="loc-addr">г. Владимир, ул. Большая Московская, 44Б<br>панорамный зал с видом на город</div>
+    <div class="photo-frame">
+      <img src="main.jpg" alt="Панорамный зал ресторана">
+    </div>
+    <a class="btn" href="https://yandex.ru/maps/org/panorama/12355669214/" target="_blank" rel="noopener">Карта</a>
+  </section>
+
+  <!-- ============ ПОЖЕЛАНИЯ (перед подтверждением) ============ -->
+  <section class="wish-strip rv">
+    <h2 class="wish-title">Пожелания</h2>
+
+    <div class="wish-item">
+      <h3>Ваше присутствие</h3>
+      <p>Самый важный подарок для нас — видеть вас рядом в этот день. Спасибо, что разделяете наш праздник.</p>
+    </div>
+
+    <div class="wish-item">
+      <h3>Цветы</h3>
+      <p>Пожалуйста, не дарите нам цветы, мы очень расстроимся, когда не сможем забрать их с собой в Москву.</p>
+    </div>
+
+    <div class="wish-item">
+      <h3>Конверт</h3>
+      <p>Не хотите ломать голову над подарком? Мы будем благодарны за cash gift — лучший вариант. А ещё оставьте нам милое пожелание!</p>
+    </div>
+
+    <div class="wish-item">
+      <h3>Впечатления</h3>
+      <p>Делитесь фото и видео с праздника — сохраним на память.</p>
+    </div>
+
+    <svg class="wish-heart" viewBox="-3 -2 38 33"><use href="#heart"/></svg>
+
+    <div class="wish-sign"><span>Е & Я</span></div>
+  </section>
+
+  <!-- ============ RSVP ============ -->
   <section class="block b-rsvp rv">
     <h2 class="b-title">Подтвердите, пожалуйста</h2>
     <svg class="squiggle" viewBox="0 0 130 20"><use href="#squig"/></svg>
     <p class="rsvp-lead">Чтобы мы подготовились к вашему приходу, дайте нам знать до 25 октября — будете ли вы с нами ♥</p>
 
     <form class="rsvp-form" id="rsvpForm" action="https://formsubmit.co/danil.gorbunov.1995@bk.ru" method="POST">
-      <!-- скрытые параметры FormSubmit -->
       <input type="hidden" name="_subject" value="Новая заявка на свадьбу Яны и Егора">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
@@ -420,9 +532,52 @@
         </div>
       </div>
 
+      <!-- напитки: чекбоксы -->
+      <div class="rsvp-group">
+        <span class="rsvp-label">Напитки <span class="rsvp-hint">(необязательно)</span></span>
+        <div class="drink-grid">
+          <div class="drink">
+            <input type="checkbox" name="drinks" id="d1" value="Красное вино">
+            <label for="d1"><span class="box"><svg viewBox="0 0 24 24"><use href="#check"/></svg></span>Красное вино</label>
+          </div>
+          <div class="drink">
+            <input type="checkbox" name="drinks" id="d2" value="Белое вино">
+            <label for="d2"><span class="box"><svg viewBox="0 0 24 24"><use href="#check"/></svg></span>Белое вино</label>
+          </div>
+          <div class="drink">
+            <input type="checkbox" name="drinks" id="d3" value="Игристое">
+            <label for="d3"><span class="box"><svg viewBox="0 0 24 24"><use href="#check"/></svg></span>Игристое</label>
+          </div>
+          <div class="drink">
+            <input type="checkbox" name="drinks" id="d4" value="Крепкий алкоголь">
+            <label for="d4"><span class="box"><svg viewBox="0 0 24 24"><use href="#check"/></svg></span>Крепкий алкоголь</label>
+          </div>
+          <div class="drink">
+            <input type="checkbox" name="drinks" id="d5" value="Сок">
+            <label for="d5"><span class="box"><svg viewBox="0 0 24 24"><use href="#check"/></svg></span>Сок</label>
+          </div>
+          <div class="drink">
+            <input type="checkbox" name="drinks" id="d6" value="Лимонад / морс">
+            <label for="d6"><span class="box"><svg viewBox="0 0 24 24"><use href="#check"/></svg></span>Лимонад / морс</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- песни для плейлиста -->
+      <div class="rsvp-group">
+        <span class="rsvp-label">Какие песни добавить в плейлист? <span class="rsvp-hint">(до 5, необязательно)</span></span>
+        <div class="songs">
+          <input type="text" name="songs" class="rsvp-input" placeholder="Песня 1: название или исполнитель">
+          <input type="text" name="songs" class="rsvp-input" placeholder="Песня 2: название или исполнитель">
+          <input type="text" name="songs" class="rsvp-input" placeholder="Песня 3: название или исполнитель">
+          <input type="text" name="songs" class="rsvp-input" placeholder="Песня 4: название или исполнитель">
+          <input type="text" name="songs" class="rsvp-input" placeholder="Песня 5: название или исполнитель">
+        </div>
+      </div>
+
       <div class="rsvp-group">
         <label class="rsvp-label" for="comment">Пожелания (необязательно)</label>
-        <textarea name="comment" id="comment" class="rsvp-textarea" placeholder="Аллергии, предпочтения в еде, песня для танцпола…"></textarea>
+        <textarea name="comment" id="comment" class="rsvp-textarea" placeholder="Аллергии, предпочтения в еде, милое пожелание молодожёнам…"></textarea>
       </div>
 
       <button type="submit" class="rsvp-submit" id="submitBtn">
@@ -432,47 +587,6 @@
 
       <div class="rsvp-status" id="rsvpStatus"></div>
     </form>
-  </section>
-
-  <section class="block b-timer rv">
-    <h2 class="b-title">До торжества осталось</h2>
-    <svg class="squiggle" viewBox="0 0 130 20"><use href="#squig"/></svg>
-    <div class="timer" id="timer">
-      <div class="t-item"><div class="t-num" id="td">0</div><div class="t-lbl">дней</div></div>
-      <div class="t-item"><div class="t-num" id="th">0</div><div class="t-lbl">часов</div></div>
-      <div class="t-item"><div class="t-num" id="tm">0</div><div class="t-lbl">минут</div></div>
-      <div class="t-item"><div class="t-num" id="ts">0</div><div class="t-lbl">секунд</div></div>
-    </div>
-    <div class="timer-done" id="timerDone" style="display:none">Торжество уже совсем близко!</div>
-  </section>
-
-  
-
-  <section class="block dark b-dc rv">
-    <h2 class="b-title">Дресс-код</h2>
-    <svg class="squiggle" viewBox="0 0 130 20"><use href="#squig"/></svg>
-    <p class="lead">Будем рады, если вы поддержите элегантный стиль вечера и выберете наряды в предложенной палитре.</p>
-    <div class="palette">
-      <span class="swatch" style="background:#EDE4D3" title="Молочный"></span>
-      <span class="swatch" style="background:#AEBCA0" title="Шалфей"></span>
-      <span class="swatch" style="background:#8A9A5B" title="Оливковый"></span>
-      <span class="swatch" style="background:#2F4A3A" title="Хвойный"></span>
-      <span class="swatch" style="background:#5A4632" title="Шоколад"></span>
-      <span class="swatch" style="background:#732F37" title="Бордо"></span>
-    </div>
-    <p class="dc-note">Пожалуйста, оставьте неон и яркие принты дома — пусть главный свет достанется нам двоим ♥</p>
-  </section>
-
-  <section class="block dark b-loc rv">
-    <h2 class="b-title">Локация</h2>
-    <svg class="squiggle" viewBox="0 0 130 20"><use href="#squig"/></svg>
-    <div class="loc-name">Ресторан «Панорама»</div>
-    <div class="loc-addr">г. Владимир, ул. Большая Московская, 44Б<br>панорамный зал с видом на город</div>
-    <div class="photo-frame">
-      <!-- ВАЖНО: /main.jpg заменено на main.jpg (относительный путь для GitHub Pages) -->
-      <img src="main.jpg" alt="Панорамный зал ресторана">
-    </div>
-    <a class="btn" href="https://yandex.ru/maps/org/panorama/12355669214/" target="_blank" rel="noopener">Карта</a>
   </section>
 
 </main>
@@ -535,7 +649,6 @@
   const submitBtn = $('submitBtn');
   const guestsBox = $('guestsBox');
 
-  // показываем «сколько гостей» только если выбрано «буду»
   document.querySelectorAll('input[name="attending"]').forEach(r => {
     r.addEventListener('change', () => {
       if(r.value.startsWith('Да')){
@@ -558,13 +671,20 @@
     submitBtn.innerHTML = '<span>Отправляем…</span><svg class="spin" viewBox="0 0 24 24"><use href="#loader"/></svg>';
 
     const data = new FormData(form);
+    const payload = Object.fromEntries(data.entries());
+
+    // собираем все отмеченные напитки в одну строку
+    const drinks = data.getAll('drinks').join(', ');
+    payload.drinks = drinks || '—';
+    // собираем непустые песни в одну строку
+    const songs = data.getAll('songs').map(s => s.trim()).filter(Boolean).join('; ');
+    payload.songs = songs || '—';
 
     try {
-      // ВАЖНО: здесь тоже замените X на ваш email
       const res = await fetch('https://formsubmit.co/ajax/danil.gorbunov.1995@bk.ru', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(data.entries()))
+        body: JSON.stringify(payload)
       });
       const json = await res.json();
       if(json.success){
@@ -584,7 +704,6 @@
     }
   });
 
-  // Если пришли обратно с ?ok=1 (fallback от FormSubmit), показываем успех
   if(new URLSearchParams(location.search).get('ok') === '1'){
     status.className = 'rsvp-status ok';
     status.textContent = 'Спасибо! Ваш ответ отправлен ♥';
